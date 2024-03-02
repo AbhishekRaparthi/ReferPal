@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">ChatHome</string>
+    <string-array name="Options">
+        <item>Logout</item>
+        <item>Account Management</item>
+        <item>FAQ</item>
+        <item>Report Bug</item>
+    </string-array>
+</resources>

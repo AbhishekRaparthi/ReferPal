@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:columnCount="3"
+    android:rowCount="2"
+    tools:context=".MainActivity">
+
+
+
+    <ImageView
+        android:layout_width="220dp"
+        android:layout_height="225dp"
+        android:src="@drawable/profilepic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="190dp"
+        android:layout_height="225dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_columnSpan="2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="John Doe"
+            android:textSize="30dp"
+            android:typeface="serif"
+            android:textStyle="italic"
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="johndoe1@gmail.com"
+            android:typeface="serif"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UI Designer"
+            android:typeface="serif"
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Google.Inc"
+            android:typeface="serif"
+            android:textColor="@color/my_primary"
+            android:textSize="25dp"/>
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_columnSpan="3"
+        android:text="Work Experience"
+        android:textFontWeight="10"
+        android:layout_marginTop="10dp"
+        android:typeface="serif"
+        android:layout_marginLeft="20dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_columnSpan="3"
+        android:layout_marginTop="10dp"
+        android:text="work_exp"
+        android:layout_marginLeft="10dp"
+        android:typeface="serif"
+
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_columnSpan="3"
+        android:text="Skills"
+        android:typeface="serif"
+        android:layout_marginLeft="20dp"
+        android:textSize="20sp"
+
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_columnSpan="3"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="skills"
+        android:typeface="serif"
+
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_columnSpan="3"
+        android:text="Education"
+        android:layout_marginTop="10dp"
+        android:typeface="serif"
+        android:layout_marginLeft="20dp"
+        android:textSize="20sp"
+
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_columnSpan="3"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="education"
+        android:typeface="serif"
+
+        />
+
+
+
+</GridLayout>
+
+
