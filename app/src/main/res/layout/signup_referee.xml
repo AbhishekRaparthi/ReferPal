@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:background="@drawable/untitled_design"
     tools:context=".MainActivity">
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -19,6 +20,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_gravity="center_horizontal"
+            android:background="@drawable/untitled_design"
             android:padding="24dp">
             <TextView
                 android:layout_width="match_parent"
@@ -57,6 +59,17 @@
                 android:id="@+id/lastname"
                 android:padding="8dp"
                 android:hint="Last Name"
+                android:drawablePadding="8dp"
+                android:textColor="@color/black"
+                android:textColorHighlight="@color/cardview_dark_background"
+                android:layout_marginTop="20dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/my_edittext"
+                android:id="@+id/email_referee"
+                android:padding="8dp"
+                android:hint="Email"
                 android:drawablePadding="8dp"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/cardview_dark_background"
