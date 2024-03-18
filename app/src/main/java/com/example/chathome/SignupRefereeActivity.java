@@ -15,19 +15,22 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.Firebase;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.regex.Pattern;
+
 import android.util.Patterns;
 
 public class SignupRefereeActivity extends AppCompatActivity {
 
     private EditText firstNameEditText;
     private EditText lastNameEditText;
-    private  EditText emailEditText;
+    private EditText emailEditText;
     private EditText skillsEditText;
     private EditText passwordEditText;
     private EditText retypePasswordEditText;
     private Button createAccountButton;
     FirebaseAuth fAuth;
+
     //    public boolean isValidEmail(CharSequence target) {
 //        return (target != null && Patterns.EMAIL_ADDRESS.matcher(target).matches());
 //    }
@@ -57,41 +60,41 @@ public class SignupRefereeActivity extends AppCompatActivity {
                 String skills = skillsEditText.getText().toString().trim();
                 String password = passwordEditText.getText().toString();
                 String repassword = retypePasswordEditText.getText().toString();
-                if (password.equals(repassword)){
+                if (password.equals(repassword)) {
                     retypePasswordEditText.setError(null);
-                }else{
+                } else {
                     retypePasswordEditText.setError("Passwords do not match");
                 }
-                if(firstname.isEmpty()){
+                if (firstname.isEmpty()) {
                     firstNameEditText.setError("First Name is required");
 
                 }
-                if(password.length()<6){
+                if (password.length() < 6) {
                     passwordEditText.setError("Password must be 6 characters or more");
                 }
-                if(lastname.isEmpty()){
+                if (lastname.isEmpty()) {
                     lastNameEditText.setError("Last Name is required");
 
                 }
-                if(email.isEmpty()){
+                if (email.isEmpty()) {
                     emailEditText.setError("Email is required");
                 }
 //                if(isValidEmail(email)){
 //emailEditText.setError("Enter email in the right format");
 //return;
 //                }
-                if(skills.isEmpty()){
+                if (skills.isEmpty()) {
                     skillsEditText.setError("skills are required");
                 }
-                fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             Intent intent = new Intent(SignupRefereeActivity.this, MainActivity.class);
                             startActivity(intent);
                             Toast.makeText(SignupRefereeActivity.this, "Account Created! ", Toast.LENGTH_SHORT).show();
-                        }else{
-                            Toast.makeText(SignupRefereeActivity.this,"Failed to Create Account"+task.getException().getMessage(),Toast.LENGTH_SHORT);
+                        } else {
+                            Toast.makeText(SignupRefereeActivity.this, "Failed to Create Account" + task.getException().getMessage(), Toast.LENGTH_SHORT);
                         }
                     }
                 });
