@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "539283091203",
+    "project_id": "referpal-63b5b",
+    "storage_bucket": "referpal-63b5b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:539283091203:android:993e0c45ab6e89bb1d8336",
+        "android_client_info": {
+          "package_name": "com.example.chathome"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJ73EnDp9CX53XvMIw6o4fKhOJ0Fy-VRM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

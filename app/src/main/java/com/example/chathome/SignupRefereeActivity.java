@@ -9,15 +9,23 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class SignupRefereeActivity extends AppCompatActivity {
 
     private EditText firstNameEditText;
     private EditText lastNameEditText;
+    private EditText emailEditText;
     private EditText skillsEditText;
     private EditText passwordEditText;
     private EditText retypePasswordEditText;
+
     Button createAccountButton, uploadButton;
 
     ImageView IVPreviewImage;
@@ -25,6 +33,11 @@ public class SignupRefereeActivity extends AppCompatActivity {
     // constant to compare
     // the activity result code
     int SELECT_PICTURE = 200;
+
+//    private Button createAccountButton;
+    FirebaseAuth fAuth;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +46,7 @@ public class SignupRefereeActivity extends AppCompatActivity {
         // Initialize views
         firstNameEditText = findViewById(R.id.firstname);
         lastNameEditText = findViewById(R.id.lastname);
+        emailEditText = findViewById(R.id.email_referee);
         skillsEditText = findViewById(R.id.skills);
         passwordEditText = findViewById(R.id.password);
         retypePasswordEditText = findViewById(R.id.retype);
@@ -45,15 +59,58 @@ public class SignupRefereeActivity extends AppCompatActivity {
                 imageChooser();
             }
         });
+
+        fAuth = FirebaseAuth.getInstance();
+
         // Set click listener for "Create Account" button
         createAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Validate input fields (e.g., check if passwords match)
+                String firstname = firstNameEditText.getText().toString().trim();
+                String lastname = lastNameEditText.getText().toString().trim();
+                String email = emailEditText.getText().toString().trim();
+                String skills = skillsEditText.getText().toString().trim();
+                String password = passwordEditText.getText().toString();
+                String repassword = retypePasswordEditText.getText().toString();
+                if (password.equals(repassword)) {
+                    retypePasswordEditText.setError(null);
+                } else {
+                    retypePasswordEditText.setError("Passwords do not match");
+                }
+                if (firstname.isEmpty()) {
+                    firstNameEditText.setError("First Name is required");
+
+                }
+                if (password.length() < 6) {
+                    passwordEditText.setError("Password must be 6 characters or more");
+                }
+                if (lastname.isEmpty()) {
+                    lastNameEditText.setError("Last Name is required");
+
+                }
+                if (email.isEmpty()) {
+                    emailEditText.setError("Email is required");
+                }
+                if (skills.isEmpty()) {
+                    skillsEditText.setError("skills are required");
+                }
+                fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Intent intent = new Intent(SignupRefereeActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            Toast.makeText(SignupRefereeActivity.this, "Account Created! ", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(SignupRefereeActivity.this, "Failed to Create Account" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
 
                 // If validation passes, navigate to the MainActivity
-                Intent intent = new Intent(SignupRefereeActivity.this, MainActivity.class);
-                startActivity(intent);
+
             }
         });
     }

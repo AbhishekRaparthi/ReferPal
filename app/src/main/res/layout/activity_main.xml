@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="@drawable/untitled_design"
     android:gravity="center"
-    tools:context=".MainActivity"
-    android:background="@drawable/untitled_design">
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/title"
@@ -40,12 +40,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
+            android:background="@drawable/untitled_design"
             android:orientation="vertical"
             android:padding="15dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="@drawable/untitled_design"
-            >
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/login"
@@ -58,7 +57,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/username"
+                android:id="@+id/email_login"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="40dp"
@@ -76,8 +75,8 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/my_edittext"
-                android:drawablePadding="8dp"
                 android:drawableLeft="@drawable/lock"
+                android:drawablePadding="8dp"
                 android:hint="Password"
                 android:inputType="textPassword"
                 android:padding="8dp"
@@ -110,10 +109,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
+            android:background="#00000000"
             android:text="New User?"
             android:textColor="@color/black"
-            android:textSize="24dp"
-            android:background="#00000000"/>
+            android:textSize="24dp" />
 
         <TextView
             android:id="@+id/referee"
