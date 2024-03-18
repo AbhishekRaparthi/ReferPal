@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.net.Uri;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,12 +17,20 @@ public class SignupRefererActivity extends AppCompatActivity {
     EditText companyNameEditText;
     EditText passwordEditText;
     EditText retypePasswordEditText;
-    Button createAccountButton;
+    Button createAccountButton, uploadButton;
+
+    ImageView IVPreviewImage;
+
+    // constant to compare
+    // the activity result code
+    int SELECT_PICTURE = 200;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup_referer);
+
 
         // Initialize views
         firstNameEditText = findViewById(R.id.firstname);
@@ -29,7 +39,16 @@ public class SignupRefererActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.password);
         retypePasswordEditText = findViewById(R.id.retype);
         createAccountButton = findViewById(R.id.create);
+        uploadButton = findViewById(R.id.uploadButton);
+        IVPreviewImage = findViewById(R.id.IVPreviewImage);
 
+
+        uploadButton .setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageChooser();
+            }
+        });
         // Set click listener for "Create Account" button
         createAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,4 +61,42 @@ public class SignupRefererActivity extends AppCompatActivity {
             }
         });
     }
+
+    // this function is triggered when
+    // the Select Image Button is clicked
+    void imageChooser() {
+
+
+
+        // create an instance of the
+        // intent of the type image
+        Intent i = new Intent();
+        i.setType("image/*");
+        i.setAction(Intent.ACTION_GET_CONTENT);
+
+        // pass the constant to compare it
+        // with the returned requestCode
+        startActivityForResult(Intent.createChooser(i, "Select Picture"), SELECT_PICTURE);
+    }
+
+    // this function is triggered when user
+    // selects the image from the imageChooser
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+
+            // compare the resultCode with the
+            // SELECT_PICTURE constant
+            if (requestCode == SELECT_PICTURE) {
+                // Get the url of the image from data
+                Uri selectedImageUri = data.getData();
+                if (null != selectedImageUri) {
+                    // update the preview image in the layout
+                    IVPreviewImage.setImageURI(selectedImageUri);
+                }
+            }
+        }
+    }
+
 }
