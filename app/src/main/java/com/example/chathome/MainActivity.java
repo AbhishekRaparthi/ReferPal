@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     EditText passwordEdittext;
     Button loginButton;
     FirebaseAuth fAuth;
+    TextView fpassTextView;
     SharedPreferences preferences;
 
     @Override
@@ -33,13 +34,14 @@ public class MainActivity extends AppCompatActivity {
         email_login = findViewById(R.id.email_login);
         passwordEdittext = findViewById(R.id.password);
         loginButton = findViewById(R.id.loginButton);
+        fpassTextView = findViewById(R.id.fpassword);
         fAuth = FirebaseAuth.getInstance();
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String email = email_login.getText().toString().trim();
                 String password = passwordEdittext.getText().toString().trim();
-                if(!email.isEmpty() && !password.isEmpty()){
+                if (!email.isEmpty() && !password.isEmpty()) {
                     fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -53,12 +55,11 @@ public class MainActivity extends AppCompatActivity {
                                 Intent intent = new Intent(MainActivity.this, Homepage.class);
                                 startActivity(intent);
                             } else {
-                                Toast.makeText(MainActivity.this, "Invalid Credentials, Try again!"+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, "Invalid Credentials, Try again!" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
-                }
-                else {
+                } else {
                     Toast.makeText(MainActivity.this, "Enter valid Email and Password", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -82,6 +83,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        fpassTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+             String password = passwordEdittext.getText().toString().trim();
+                    Intent intent = new Intent(MainActivity.this, ResetPassword.class);
+                    startActivity(intent);
+
+            }
+        });
 
     }
 }
