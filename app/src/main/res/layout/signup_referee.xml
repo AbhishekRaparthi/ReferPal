@@ -61,12 +61,15 @@
             <!--ImageView to preview the selected image-->
             <ImageView
                 android:id="@+id/IVPreviewImage"
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:layout_marginStart="16dp"
+                android:layout_width="351dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:textSize="20sp" />
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:visibility="gone"
+                tools:visibility="visible" />
 
 
             <EditText
