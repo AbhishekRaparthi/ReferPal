@@ -4,10 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.chathome.utils.FirebaseFirestoreDB;
+import com.example.chathome.modal.Users;
 
 public class Homepage extends AppCompatActivity {
 
@@ -16,22 +20,12 @@ public class Homepage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
+        FirebaseFirestoreDB database=new FirebaseFirestoreDB();
+        Users user=database.getUser("kL7NleXHNEFXzAbgCAb4");
+        populateTextView(user);
 
-        LinearLayout allchats=findViewById(R.id.scrollLayout);
-        int count=allchats.getChildCount();
-        for(int i=0;i<count;i++){
-            View child=allchats.getChildAt(i);
-            child.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View view) {
-                    // click handling code
-                    TextView tv=(TextView) view;
-                    openChatWindow();
-                }
-            });;
 
-        }
-
+        //To Open user profile
         ImageView myprofile=findViewById(R.id.myProfile);
         myprofile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,6 +33,17 @@ public class Homepage extends AppCompatActivity {
                 openMyProfile();
             }
         });
+    }
+
+    void populateTextView(Users user){
+        TextView text=findViewById(R.id.textView010);
+        if(user!=null){
+            String data=user.getFirstname()+"\n"+user.getCompany();
+            text.setText(data);
+        }else{
+            Log.d("INFO",  user.toString());
+        }
+
     }
 
     void openChatWindow(){
