@@ -12,6 +12,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.chathome.modal.Users;
+import com.example.chathome.utils.FirebaseFirestoreDB;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Firebase;
@@ -26,6 +28,7 @@ public class SignupRefererActivity extends AppCompatActivity {
     EditText email_referer;
     EditText passwordEditText;
     EditText retypePasswordEditText;
+    String uid;
 
     Button createAccountButton, uploadButton;
 
@@ -76,6 +79,7 @@ public class SignupRefererActivity extends AppCompatActivity {
                 String firstname = firstNameEditText.getText().toString().trim();
                 String lastname = lastNameEditText.getText().toString().trim();
                 String email = email_referer.getText().toString().trim();
+                String company = companyNameEditText.getText().toString().trim();
                 String password = passwordEditText.getText().toString();
                 String repassword = retypePasswordEditText.getText().toString();
                 if (password.equals(repassword)) {
@@ -104,6 +108,10 @@ public class SignupRefererActivity extends AppCompatActivity {
                             Toast.makeText(SignupRefererActivity.this, "Account Created", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(SignupRefererActivity.this, MainActivity.class);
                             startActivity(intent);
+                            uid = fAuth.getCurrentUser().getUid();
+                            Users user = new Users(firstname,lastname, email,"", company);
+                            FirebaseFirestoreDB database=new FirebaseFirestoreDB();
+                            database.setUser(user,uid);
                         } else {
                             Toast.makeText(SignupRefererActivity.this, "Error Creating Account" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
