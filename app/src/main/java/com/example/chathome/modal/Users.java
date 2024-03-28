@@ -4,10 +4,37 @@ public class Users {
     String firstname;
     String lastname;
     String id;
-
     String company;
+    String email;
+    String skills;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getSkills() {
+        return skills;
+    }
+
+    public void setSkills(String skills) {
+        this.skills = skills;
+    }
+
 
     public Users() {
+    }
+
+    public Users(String firstname, String lastname, String email, String skills, String company) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.skills = skills;
+        this.company = company;
+
     }
 
     public String getFirstname() {

@@ -12,6 +12,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.chathome.modal.Users;
+import com.example.chathome.utils.FirebaseFirestoreDB;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -25,6 +27,7 @@ public class SignupRefereeActivity extends AppCompatActivity {
     private EditText skillsEditText;
     private EditText passwordEditText;
     private EditText retypePasswordEditText;
+    String uid;
 
     Button createAccountButton, uploadButton;
 
@@ -102,6 +105,10 @@ public class SignupRefereeActivity extends AppCompatActivity {
                             Intent intent = new Intent(SignupRefereeActivity.this, MainActivity.class);
                             startActivity(intent);
                             Toast.makeText(SignupRefereeActivity.this, "Account Created! ", Toast.LENGTH_SHORT).show();
+                            uid = fAuth.getCurrentUser().getUid();
+                            Users user = new Users(firstname,lastname, email, skills,"");
+                            FirebaseFirestoreDB database=new FirebaseFirestoreDB();
+                            database.setUser(user,uid);
                         } else {
                             Toast.makeText(SignupRefereeActivity.this, "Failed to Create Account" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
