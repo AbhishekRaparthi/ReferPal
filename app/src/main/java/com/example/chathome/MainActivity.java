@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.content.Intent;
 
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -39,29 +40,30 @@ public class MainActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email = email_login.getText().toString().trim();
-                String password = passwordEdittext.getText().toString().trim();
-                if (!email.isEmpty() && !password.isEmpty()) {
-                    fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                String uid = fAuth.getCurrentUser().getUid();
-                                preferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
-                                SharedPreferences.Editor editor = preferences.edit();
-                                editor.putString("uid", uid);
-                                editor.apply();
-                                Toast.makeText(MainActivity.this, "Logged In", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(MainActivity.this, Homepage.class);
-                                startActivity(intent);
-                            } else {
-                                Toast.makeText(MainActivity.this, "Invalid Credentials, Try again!" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                } else {
-                    Toast.makeText(MainActivity.this, "Enter valid Email and Password", Toast.LENGTH_SHORT).show();
-                }
+                open();
+//                String email = email_login.getText().toString().trim();
+//                String password = passwordEdittext.getText().toString().trim();
+//                if (!email.isEmpty() && !password.isEmpty()) {
+//                    fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//                        @Override
+//                        public void onComplete(@NonNull Task<AuthResult> task) {
+//                            if (task.isSuccessful()) {
+//                                String uid = fAuth.getCurrentUser().getUid();
+//                                preferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
+//                                SharedPreferences.Editor editor = preferences.edit();
+//                                editor.putString("uid", uid);
+//                                editor.apply();
+//                                Toast.makeText(MainActivity.this, "Logged In", Toast.LENGTH_SHORT).show();
+//                                Intent intent = new Intent(MainActivity.this, Homepage.class);
+//                                startActivity(intent);
+//                            } else {
+//                                Toast.makeText(MainActivity.this, "Invalid Credentials, Try again!" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+//                            }
+//                        }
+//                    });
+//                } else {
+//                    Toast.makeText(MainActivity.this, "Enter valid Email and Password", Toast.LENGTH_SHORT).show();
+//                }
             }
         });
         TextView referee = findViewById(R.id.referee);
@@ -94,4 +96,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    private void open() {
+        Intent intent=new Intent(this, Homepage.class);
+        startActivity(intent);
+    }
+
 }

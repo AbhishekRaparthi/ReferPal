@@ -23,7 +23,7 @@
         android:src="@drawable/baseline_person_24"
         android:background="@drawable/circle_background"
         android:onClick="uploadImage"
-         />
+        />
 
 
     <LinearLayout
@@ -32,14 +32,10 @@
         android:gravity="center"
         android:orientation="vertical"
         android:layout_columnSpan="2">
-
-
-
-
     </LinearLayout>
 
     <EditText
-        android:id="@+id/name_referer"
+        android:id="@+id/name_referee"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="John Doe"
@@ -53,7 +49,7 @@
         android:typeface="serif" />
 
     <EditText
-        android:id="@+id/email_referer"
+        android:id="@+id/email_referee"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Email : john@email.com"
@@ -67,7 +63,7 @@
         android:typeface="serif" />
 
     <EditText
-        android:id="@+id/designation_referer"
+        android:id="@+id/designation_referee"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_columnSpan="3"
@@ -82,7 +78,7 @@
 
 
     <EditText
-        android:id="@+id/company_referer"
+        android:id="@+id/company_referee"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_columnSpan="3"
@@ -97,7 +93,7 @@
 
 
     <EditText
-        android:id="@+id/workexperience_referer"
+        android:id="@+id/workexperience_referee"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
@@ -122,7 +118,7 @@
         android:textColor="@color/black"
         android:textStyle="italic"
         android:hint="Enter your work experience"
-         />
+        />
 
 
 </GridLayout>

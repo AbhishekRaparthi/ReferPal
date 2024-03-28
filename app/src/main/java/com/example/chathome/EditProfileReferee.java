@@ -1,18 +1,14 @@
 package com.example.chathome;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.net.Uri;
-import android.view.View;
 import android.content.Intent;
-
-
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageButton;
 
-import java.time.Instant;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class EditProfile extends AppCompatActivity {
+public class EditProfileReferee extends AppCompatActivity {
 
     private static final int PICK_IMAGE_REQUEST = 200;
 
