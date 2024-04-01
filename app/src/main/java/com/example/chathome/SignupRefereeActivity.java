@@ -28,7 +28,6 @@ public class SignupRefereeActivity extends AppCompatActivity {
     private EditText passwordEditText;
     private EditText retypePasswordEditText;
     String uid;
-
     Button createAccountButton, uploadButton;
 
     ImageView IVPreviewImage;
@@ -76,44 +75,46 @@ public class SignupRefereeActivity extends AppCompatActivity {
                 String skills = skillsEditText.getText().toString().trim();
                 String password = passwordEditText.getText().toString();
                 String repassword = retypePasswordEditText.getText().toString();
-                if (password.equals(repassword)) {
-                    retypePasswordEditText.setError(null);
-                } else {
-                    retypePasswordEditText.setError("Passwords do not match");
-                }
+               final String type = "user";
                 if (firstname.isEmpty()) {
                     firstNameEditText.setError("First Name is required");
 
                 }
-                if (password.length() < 6) {
+               else if (password.length() < 6) {
                     passwordEditText.setError("Password must be 6 characters or more");
                 }
-                if (lastname.isEmpty()) {
+                else if (lastname.isEmpty()) {
                     lastNameEditText.setError("Last Name is required");
 
                 }
-                if (email.isEmpty()) {
+                else if (email.isEmpty()) {
                     emailEditText.setError("Email is required");
                 }
-                if (skills.isEmpty()) {
+                else if (skills.isEmpty()) {
                     skillsEditText.setError("skills are required");
                 }
-                fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Intent intent = new Intent(SignupRefereeActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            Toast.makeText(SignupRefereeActivity.this, "Account Created! ", Toast.LENGTH_SHORT).show();
-                            uid = fAuth.getCurrentUser().getUid();
-                            Users user = new Users(firstname,lastname, email, skills,"");
-                            FirebaseFirestoreDB database=new FirebaseFirestoreDB();
-                            database.setUser(user,uid);
-                        } else {
-                            Toast.makeText(SignupRefereeActivity.this, "Failed to Create Account" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+
+               else if (!password.equals(repassword)) {
+                    retypePasswordEditText.setError("Passwords do not match");
+                } else {
+                    fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                Intent intent = new Intent(SignupRefereeActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                Toast.makeText(SignupRefereeActivity.this, "Account Created! ", Toast.LENGTH_SHORT).show();
+                                uid = fAuth.getCurrentUser().getUid();
+                                Users user = new Users(firstname,lastname, email, skills,"", type);
+                                FirebaseFirestoreDB database=new FirebaseFirestoreDB();
+                                database.setUser(user,uid);
+                            } else {
+                                Toast.makeText(SignupRefereeActivity.this, "Failed to Create Account" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
-                });
+                    });
+                }
+
 
 
                 // If validation passes, navigate to the MainActivity

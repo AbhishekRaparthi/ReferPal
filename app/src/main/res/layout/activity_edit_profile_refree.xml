@@ -10,7 +10,6 @@
     tools:context=".MainActivity">
 
 
-
     <ImageButton
         android:id="@+id/uploadImage"
         android:layout_width="177dp"
@@ -35,10 +34,24 @@
     </LinearLayout>
 
     <EditText
-        android:id="@+id/name_referee"
+        android:id="@+id/first_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="John Doe"
+        android:text="John"
+        android:layout_columnSpan="3"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:hint="edit_email"
+        android:minHeight="48dp"
+        android:textSize="20sp"
+        android:drawableRight="@drawable/baseline_edit_24"
+        android:typeface="serif" />
+
+    <EditText
+        android:id="@+id/last_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Doe"
         android:layout_columnSpan="3"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
@@ -63,47 +76,34 @@
         android:typeface="serif" />
 
     <EditText
-        android:id="@+id/designation_referee"
+        android:id="@+id/skills_referee"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_columnSpan="3"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:text="Designation : UI Designer"
-        android:hint="edit_designation"
+        android:text="Skills : UI Designers"
+        android:hint="edit_skills"
         android:minHeight="48dp"
         android:textSize="20sp"
         android:drawableRight="@drawable/baseline_edit_24"
         android:typeface="serif" />
 
 
-    <EditText
-        android:id="@+id/company_referee"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_columnSpan="3"
-        android:text="Working at : Google.Inc"
-        android:textFontWeight="10"
-        android:layout_marginTop="10dp"
-        android:typeface="serif"
-        android:layout_marginLeft="10dp"
-        android:textSize="20sp"
-        android:drawableRight="@drawable/baseline_edit_24"
-        />
+
 
 
     <EditText
-        android:id="@+id/workexperience_referee"
+        android:id="@+id/education_referee"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        android:text="Work Experience"
+        android:text="Education"
         android:textFontWeight="10"
         android:layout_marginTop="10dp"
         android:typeface="serif"
         android:padding="8dp"
         android:layout_marginLeft="10dp"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:drawableRight="@drawable/baseline_edit_24"
         />
 

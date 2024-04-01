@@ -21,8 +21,8 @@ public class Homepage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
         FirebaseFirestoreDB database=new FirebaseFirestoreDB();
-        Users user=database.getUser("kL7NleXHNEFXzAbgCAb4");
-        populateTextView(user);
+//        Users user=database.getUser("kL7NleXHNEFXzAbgCAb4");
+//        populateTextView(user);
 
 
         //To Open user profile
@@ -37,12 +37,8 @@ public class Homepage extends AppCompatActivity {
 
     void populateTextView(Users user){
         TextView text=findViewById(R.id.textView010);
-        if(user!=null){
-            String data=user.getFirstname()+"\n"+user.getCompany();
-            text.setText(data);
-        }else{
-            Log.d("INFO",  user.toString());
-        }
+        text.setText("Username \n Company");
+
 
     }
 
@@ -52,7 +48,7 @@ public class Homepage extends AppCompatActivity {
     }
 
     void openMyProfile(){
-        Intent intent=new Intent(this,EditProfile.class);
+        Intent intent=new Intent(this, EditProfileReferee.class);
         startActivity(intent);
     }
 }

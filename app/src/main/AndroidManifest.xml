@@ -22,6 +22,9 @@
             android:name=".EditProfile"
             android:exported="false" />
         <activity
+            android:name=".EditProfileReferee"
+            android:exported="false" />
+        <activity
             android:name=".SignupRefererActivity"
             android:exported="false" />
         <activity

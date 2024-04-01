@@ -7,7 +7,7 @@ public class Users {
     String company;
     String email;
     String skills;
-
+String type;
     public String getEmail() {
         return email;
     }
@@ -28,13 +28,13 @@ public class Users {
     public Users() {
     }
 
-    public Users(String firstname, String lastname, String email, String skills, String company) {
+    public Users(String firstname, String lastname, String email, String skills, String company, String type) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
         this.skills = skills;
         this.company = company;
-
+this.type = type;
     }
 
     public String getFirstname() {
@@ -63,6 +63,14 @@ public class Users {
 
     public String getCompany() {
         return company;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public void setCompany(String company) {
