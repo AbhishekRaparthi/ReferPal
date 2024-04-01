@@ -1,11 +1,13 @@
 package com.example.chathome;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.Display;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,10 +16,16 @@ import android.widget.Toast;
 import android.content.Intent;
 
 
+import com.example.chathome.modal.Users;
+import com.example.chathome.utils.FirebaseFirestoreDB;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -26,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     Button loginButton;
     FirebaseAuth fAuth;
     TextView fpassTextView;
-    SharedPreferences preferences;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,33 +45,43 @@ public class MainActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.loginButton);
         fpassTextView = findViewById(R.id.fpassword);
         fAuth = FirebaseAuth.getInstance();
+        SharedPreferences preferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
+        String userType = preferences.getString("userType", null);
+        String userID = preferences.getString("UID", null);
+        if (userID != null && userType != null) {
+            Log.d(TAG, "User ID " + userID);
+            Toast.makeText(MainActivity.this, "Logged In", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this, Homepage.class);
+            startActivity(intent);
+            finish();
+        } else {
+            Log.d(TAG, "User Type is null");
+        }
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                open();
-//                String email = email_login.getText().toString().trim();
-//                String password = passwordEdittext.getText().toString().trim();
-//                if (!email.isEmpty() && !password.isEmpty()) {
-//                    fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<AuthResult> task) {
-//                            if (task.isSuccessful()) {
-//                                String uid = fAuth.getCurrentUser().getUid();
-//                                preferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
-//                                SharedPreferences.Editor editor = preferences.edit();
-//                                editor.putString("uid", uid);
-//                                editor.apply();
-//                                Toast.makeText(MainActivity.this, "Logged In", Toast.LENGTH_SHORT).show();
-//                                Intent intent = new Intent(MainActivity.this, Homepage.class);
-//                                startActivity(intent);
-//                            } else {
-//                                Toast.makeText(MainActivity.this, "Invalid Credentials, Try again!" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-//                            }
-//                        }
-//                    });
-//                } else {
-//                    Toast.makeText(MainActivity.this, "Enter valid Email and Password", Toast.LENGTH_SHORT).show();
-//                }
+                String email = email_login.getText().toString().trim();
+                String password = passwordEdittext.getText().toString().trim();
+                if (!email.isEmpty() && !password.isEmpty()) {
+                    fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                FirebaseFirestoreDB fireDB = new FirebaseFirestoreDB();
+                                fireDB.setType();
+//                                getType();
+                                Toast.makeText(MainActivity.this, "Logged In", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(MainActivity.this, Homepage.class);
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                Toast.makeText(MainActivity.this, "Invalid Credentials, Try again!" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                } else {
+                    Toast.makeText(MainActivity.this, "Enter valid Email and Password", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         TextView referee = findViewById(R.id.referee);
@@ -88,9 +106,9 @@ public class MainActivity extends AppCompatActivity {
         fpassTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             String password = passwordEdittext.getText().toString().trim();
-                    Intent intent = new Intent(MainActivity.this, ResetPassword.class);
-                    startActivity(intent);
+                String password = passwordEdittext.getText().toString().trim();
+                Intent intent = new Intent(MainActivity.this, ResetPassword.class);
+                startActivity(intent);
 
             }
         });
@@ -98,8 +116,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void open() {
-        Intent intent=new Intent(this, Homepage.class);
+        Intent intent = new Intent(this, Homepage.class);
         startActivity(intent);
     }
+
+    private void getuid() {
+
+    }
+
+
+//    public void getType(){
+//        SharedPreferences preferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
+//        String userType = preferences.getString("userType", null);
+//        String userID = preferences.getString("UID", null);
+//        if (userType != null && userID!=null) {
+//            Log.d(TAG, "User ID " + userID);
+//            Log.d(TAG, "User Type: " + userType);
+//        } else {
+//            Log.d(TAG, "User Type is null");
+//        }
+//    }
 
 }

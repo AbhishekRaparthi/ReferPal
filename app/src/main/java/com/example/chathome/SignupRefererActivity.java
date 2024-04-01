@@ -82,41 +82,43 @@ public class SignupRefererActivity extends AppCompatActivity {
                 String company = companyNameEditText.getText().toString().trim();
                 String password = passwordEditText.getText().toString();
                 String repassword = retypePasswordEditText.getText().toString();
-                if (password.equals(repassword)) {
-                    retypePasswordEditText.setError(null);
-                } else {
-                    retypePasswordEditText.setError("Passwords do not match");
-                }
+                final String type = "professional";
+
                 if (firstname.isEmpty()) {
                     firstNameEditText.setError("First Name is required");
 
                 }
-                if (password.length() < 6) {
+               else if (password.length() < 6) {
                     passwordEditText.setError("Password must be 6 characters or more");
                 }
-                if (lastname.isEmpty()) {
+               else if (lastname.isEmpty()) {
                     lastNameEditText.setError("Last Name is required");
 
                 }
-                if (email.isEmpty()) {
+               else if (email.isEmpty()) {
                     email_referer.setError("Email is required");
                 }
-                fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(SignupRefererActivity.this, "Account Created", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(SignupRefererActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            uid = fAuth.getCurrentUser().getUid();
-                            Users user = new Users(firstname,lastname, email,"", company);
-                            FirebaseFirestoreDB database=new FirebaseFirestoreDB();
-                            database.setUser(user,uid);
-                        } else {
-                            Toast.makeText(SignupRefererActivity.this, "Error Creating Account" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+               else if (!password.equals(repassword)) {
+                    retypePasswordEditText.setError("Passwords do not match");
+                } else {
+                    fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(SignupRefererActivity.this, "Account Created", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(SignupRefererActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                uid = fAuth.getCurrentUser().getUid();
+                                Users user = new Users(firstname,lastname, email,"", company, type);
+                                FirebaseFirestoreDB database=new FirebaseFirestoreDB();
+                                database.setUser(user,uid);
+                            } else {
+                                Toast.makeText(SignupRefererActivity.this, "Error Creating Account" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
-                });
+                    });
+                }
+
 
                 // If validation passes, navigate to the MainActivity
 
