@@ -23,16 +23,15 @@ import com.example.chathome.modal.Users;
 import com.google.firebase.firestore.auth.User;
 
 public class FirebaseFirestoreDB {
-    private FirebaseFirestore db=FirebaseFirestore.getInstance();;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private static final String USERCOLLECTION="userDetails";
     public FirebaseFirestoreDB() {
     }
-    FirebaseAuth fAuth;
+    FirebaseAuth fAuth = FirebaseAuth.getInstance();
     private Context mContext; // Add Context field
 
     public FirebaseFirestoreDB(Context context) { // Constructor with Context parameter
         mContext = context;
-        fAuth = FirebaseAuth.getInstance();
     }
 
     private FirebaseFirestore getDB(){
@@ -58,11 +57,17 @@ public class FirebaseFirestoreDB {
                                 Log.d(TAG, "UID: " + userId);
 
                                 // Store the type in SharedPreferences
-                                SharedPreferences preferences = mContext.getSharedPreferences("myPrefs", MODE_PRIVATE);
-                                SharedPreferences.Editor editor = preferences.edit();
-                                editor.putString("userType", type);
-                                editor.putString("UID", userId);
-                                editor.apply();
+                                if (mContext != null) {
+
+                                    SharedPreferences preferences = mContext.getSharedPreferences("myPrefs", MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = preferences.edit();
+                                    editor.putString("userType", type);
+                                    editor.putString("UID", userId);
+                                    editor.apply();
+                                }else{
+                                    Log.d(TAG, "mContext is null, unable to access SharedPreferences");
+
+                                }
 
                                 // Now you can access the type from SharedPreferences
                             } else {

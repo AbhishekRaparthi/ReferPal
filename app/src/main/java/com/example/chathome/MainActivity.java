@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.loginButton);
         fpassTextView = findViewById(R.id.fpassword);
         fAuth = FirebaseAuth.getInstance();
-        SharedPreferences preferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
+        SharedPreferences preferences = getSharedPreferences("myPrefs", this.MODE_PRIVATE);
         String userType = preferences.getString("userType", null);
         String userID = preferences.getString("UID", null);
         if (userID != null && userType != null) {
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                FirebaseFirestoreDB fireDB = new FirebaseFirestoreDB();
+                                FirebaseFirestoreDB fireDB = new FirebaseFirestoreDB(MainActivity.this);
                                 fireDB.setType();
 //                                getType();
                                 Toast.makeText(MainActivity.this, "Logged In", Toast.LENGTH_SHORT).show();

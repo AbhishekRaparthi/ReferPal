@@ -110,7 +110,7 @@ public class SignupRefererActivity extends AppCompatActivity {
                                 startActivity(intent);
                                 uid = fAuth.getCurrentUser().getUid();
                                 Users user = new Users(firstname,lastname, email,"", company, type);
-                                FirebaseFirestoreDB database=new FirebaseFirestoreDB();
+                                FirebaseFirestoreDB database=new FirebaseFirestoreDB(SignupRefererActivity.this);
                                 database.setUser(user,uid);
                             } else {
                                 Toast.makeText(SignupRefererActivity.this, "Error Creating Account" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
