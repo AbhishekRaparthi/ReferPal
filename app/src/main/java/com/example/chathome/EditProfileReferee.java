@@ -31,7 +31,7 @@ public class EditProfileReferee extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 
-        populateData();
+
     }
     public void populateData(){
         FirebaseAuth auth=FirebaseAuth.getInstance();

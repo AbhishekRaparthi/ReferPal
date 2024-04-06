@@ -20,7 +20,7 @@ public class Homepage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
-        FirebaseFirestoreDB database=new FirebaseFirestoreDB();
+        FirebaseFirestoreDB database=new FirebaseFirestoreDB(this);
 //        Users user=database.getUser("kL7NleXHNEFXzAbgCAb4");
 //        populateTextView(user);
 
