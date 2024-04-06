@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,9 +22,15 @@ public class Homepage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
         FirebaseFirestoreDB database=new FirebaseFirestoreDB(this);
-//        Users user=database.getUser("kL7NleXHNEFXzAbgCAb4");
-//        populateTextView(user);
 
+        Button searchButton=findViewById(R.id.homepage_search_button);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(Homepage.this, SearchActivity.class);
+                startActivity(intent);
+            }
+        });
 
         //To Open user profile
         ImageView myprofile=findViewById(R.id.myProfile);
@@ -35,12 +42,7 @@ public class Homepage extends AppCompatActivity {
         });
     }
 
-    void populateTextView(Users user){
-        TextView text=findViewById(R.id.textView010);
-        text.setText("Username \n Company");
 
-
-    }
 
     void openChatWindow(){
         Intent intent=new Intent(this,ChatWindow.class);
