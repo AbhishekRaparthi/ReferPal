@@ -50,6 +50,8 @@ dependencies {
 
     // Declare the dependency for the Cloud Firestore library
     // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation ("com.firebaseui:firebase-ui-database:8.0.2")
     implementation("com.google.firebase:firebase-firestore")
-
+    implementation ("androidx.appcompat:appcompat-resources:1.6.1")
+    implementation ("com.firebaseui:firebase-ui-firestore:8.0.2")
 }

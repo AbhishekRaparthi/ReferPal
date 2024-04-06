@@ -125,16 +125,5 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-//    public void getType(){
-//        SharedPreferences preferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
-//        String userType = preferences.getString("userType", null);
-//        String userID = preferences.getString("UID", null);
-//        if (userType != null && userID!=null) {
-//            Log.d(TAG, "User ID " + userID);
-//            Log.d(TAG, "User Type: " + userType);
-//        } else {
-//            Log.d(TAG, "User Type is null");
-//        }
-//    }
 
 }
