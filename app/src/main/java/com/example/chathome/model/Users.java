@@ -1,4 +1,4 @@
-package com.example.chathome.modal;
+package com.example.chathome.model;
 
 public class Users {
     String firstname;
