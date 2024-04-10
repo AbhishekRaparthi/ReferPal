@@ -1,4 +1,4 @@
-package com.example.chathome.modal;
+package com.example.chathome.model;
 
 public class Users {
     String firstname;
@@ -28,7 +28,8 @@ String type;
     public Users() {
     }
 
-    public Users(String firstname, String lastname, String email, String skills, String company, String type) {
+    public Users(String id, String firstname, String lastname, String email, String skills, String company, String type) {
+        this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;

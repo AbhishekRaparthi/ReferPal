@@ -15,7 +15,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.chathome.adapter.SearchUserAdapter;
-import com.example.chathome.modal.Users;
+import com.example.chathome.model.Users;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;

@@ -3,22 +3,20 @@ package com.example.chathome.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.chathome.ChatWindow;
 import com.example.chathome.R;
-import com.example.chathome.modal.Users;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.example.chathome.model.Users;
+import com.example.chathome.utils.AndroidUtil;
 
 import java.util.ArrayList;
 
@@ -46,6 +44,13 @@ public class SearchUserAdapter extends RecyclerView.Adapter<SearchUserAdapter.My
         Log.i("USers",user.getFirstname());
         holder.name.setText(user.getFirstname()+" "+user.getLastname());
         holder.company.setText(user.getCompany());
+
+        holder.itemView.setOnClickListener(v->{
+            Intent intent=new Intent(context, ChatWindow.class);
+            AndroidUtil.passUserModelAsIntent(intent,user);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        });
     }
 
     @Override

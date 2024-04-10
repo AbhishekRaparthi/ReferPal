@@ -12,11 +12,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.chathome.modal.Users;
+import com.example.chathome.model.Users;
 import com.example.chathome.utils.FirebaseFirestoreDB;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.Firebase;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -109,7 +108,8 @@ public class SignupRefererActivity extends AppCompatActivity {
                                 Intent intent = new Intent(SignupRefererActivity.this, MainActivity.class);
                                 startActivity(intent);
                                 uid = fAuth.getCurrentUser().getUid();
-                                Users user = new Users(firstname,lastname, email,"", company, type);
+                                String id = uid;
+                                Users user = new Users(id, firstname,lastname, email,"", company, type);
                                 FirebaseFirestoreDB database=new FirebaseFirestoreDB(SignupRefererActivity.this);
                                 database.setUser(user,uid);
                             } else {
