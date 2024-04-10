@@ -4,7 +4,6 @@ package com.example.chathome.utils;
 import static android.content.ContentValues.TAG;
 import static android.content.Context.MODE_PRIVATE;
 
-import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.content.Context;
@@ -16,11 +15,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.example.chathome.modal.Users;
-import com.google.firebase.firestore.auth.User;
+import com.example.chathome.model.Users;
 
 public class FirebaseFirestoreDB {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -100,5 +99,26 @@ public class FirebaseFirestoreDB {
 
             }
         });
+    }
+
+
+    public DocumentReference getChatRoomReference(String chatroomId){
+        return FirebaseFirestore.getInstance().collection("chatrooms").document(chatroomId);
+    }
+
+    public CollectionReference getChatroomMessageReference(String chatroomId){
+        return getChatRoomReference(chatroomId).collection("chats");
+    }
+
+    public String getChatroomId(String userId1,String userId2){
+        if(userId1.hashCode()<userId2.hashCode()){
+            return userId1+"_"+userId2;
+        }else{
+            return userId2+"_"+userId1;
+        }
+    }
+
+    public String currentUserId(){
+        return FirebaseAuth.getInstance().getUid();
     }
 }
