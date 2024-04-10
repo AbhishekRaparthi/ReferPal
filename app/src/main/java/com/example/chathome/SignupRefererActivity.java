@@ -109,7 +109,8 @@ public class SignupRefererActivity extends AppCompatActivity {
                                 Intent intent = new Intent(SignupRefererActivity.this, MainActivity.class);
                                 startActivity(intent);
                                 uid = fAuth.getCurrentUser().getUid();
-                                Users user = new Users(firstname,lastname, email,"", company, type);
+                                String id = uid;
+                                Users user = new Users(id, firstname,lastname, email,"", company, type);
                                 FirebaseFirestoreDB database=new FirebaseFirestoreDB(SignupRefererActivity.this);
                                 database.setUser(user,uid);
                             } else {
