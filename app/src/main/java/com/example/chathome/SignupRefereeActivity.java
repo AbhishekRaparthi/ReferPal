@@ -105,7 +105,8 @@ public class SignupRefereeActivity extends AppCompatActivity {
                                 startActivity(intent);
                                 Toast.makeText(SignupRefereeActivity.this, "Account Created! ", Toast.LENGTH_SHORT).show();
                                 uid = fAuth.getCurrentUser().getUid();
-                                Users user = new Users(firstname,lastname, email, skills,"", type);
+                               String id = uid;
+                                Users user = new Users(id, firstname,lastname, email, skills,"", type);
                                 FirebaseFirestoreDB database=new FirebaseFirestoreDB(SignupRefereeActivity.this);
                                 database.setUser(user,uid);
                             } else {
